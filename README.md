@@ -2,7 +2,7 @@
 
 <p align="center">
 <a href="https://www.fiap.com.br/">
-  <img src="../../../assets/logo-fiap.png" 
+  <img src="assets/logo-fiap.png" 
        alt="FIAP - Faculdade de Informática e Administração Paulista" 
        width="40%">
 </a>
@@ -14,18 +14,14 @@
 
 ## Nome do grupo
 
-## 👨‍🎓 Integrantes: 
-- <a href="https://www.linkedin.com/in/sabrina-otoni-22525519b/">Nome do integrante 1</a>
-- <a href="https://www.linkedin.com/in/sabrina-otoni-22525519b/">Nome do integrante 2</a>
-- <a href="https://www.linkedin.com/in/sabrina-otoni-22525519b/">Nome do integrante 3</a> 
-- <a href="https://www.linkedin.com/in/sabrina-otoni-22525519b/">Nome do integrante 4</a> 
-- <a href="https://www.linkedin.com/in/sabrina-otoni-22525519b/">Nome do integrante 5</a>
+## 👨‍🎓 Integrante: 
+- <a href="https://www.linkedin.com/in/laura-castilho/">Laura de Andrade Castilho - RM568507</a> 
 
 ## 👩‍🏫 Professores:
 ### Tutor(a) 
-- <a href="https://www.linkedin.com/in/sabrina-otoni-22525519b/">Nome do Tutor</a>
+- <a href="https://www.linkedin.com/in/anacristinadossantos/">Ana Cristina dos Santos</a>
 ### Coordenador(a)
-- <a href="https://www.linkedin.com/in/andregodoichiovato/">Nome do Coordenador</a>
+- <a href="https://www.linkedin.com/in/andregodoichiovato/">André Godoi Chiovato</a>
 
 
 ## 📜 Descrição
