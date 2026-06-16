@@ -76,7 +76,7 @@ importância de features, curvas de treinamento da RNA etc.) em
 
 ## 📎 Links e Observações
 
-- <b>Vídeo demonstrativo</b>: [https://www.youtube.com/watch?v=qHsdGrq7KXY](https://www.youtube.com/watch?v=qHsdGrq7KXY)
+- <b>Vídeo demonstrativo</b>: [https://www.youtube.com/watch?v=1M5O5n8Dwew](https://www.youtube.com/watch?v=1M5O5n8Dwew)
 - <b>Explicação de decisões técnicas</b>: ver os READMEs de
   `src/data_pipeline/`, `src/machine_learning/` e `src/dashboard/`, que
   detalham as escolhas de cada camada.
