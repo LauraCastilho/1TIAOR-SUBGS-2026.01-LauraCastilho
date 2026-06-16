@@ -1,0 +1,53 @@
+{
+  "status_saude": {
+    "random_forest": {
+      "accuracy": 0.8663,
+      "precision_macro": 0.7135,
+      "recall_macro": 0.7256,
+      "f1_macro": 0.7178,
+      "f1_weighted": 0.8707
+    },
+    "gradient_boosting": {
+      "accuracy": 0.8663,
+      "precision_macro": 0.6671,
+      "recall_macro": 0.748,
+      "f1_macro": 0.701,
+      "f1_weighted": 0.8746
+    },
+    "rna_numpy": {
+      "accuracy": 0.663,
+      "precision_macro": 0.4715,
+      "recall_macro": 0.6719,
+      "f1_macro": 0.4927,
+      "f1_weighted": 0.7151
+    }
+  },
+  "necessidade_irrigacao": {
+    "random_forest": {
+      "accuracy": 0.9489,
+      "precision_macro": 0.9487,
+      "recall_macro": 0.9493,
+      "f1_macro": 0.9489,
+      "f1_weighted": 0.9489
+    },
+    "gradient_boosting": {
+      "accuracy": 0.9467,
+      "precision_macro": 0.9465,
+      "recall_macro": 0.947,
+      "f1_macro": 0.9467,
+      "f1_weighted": 0.9468
+    }
+  },
+  "produtividade_estimada_ton_ha": {
+    "random_forest": {
+      "mae": 0.1346,
+      "rmse": 0.1686,
+      "r2": 0.9887
+    },
+    "xgboost": {
+      "mae": 0.147,
+      "rmse": 0.1851,
+      "r2": 0.9863
+    }
+  }
+}

@@ -10,9 +10,10 @@
 
 <br>
 
-# Nome do projeto/atividade
+# AgroNexusSpace
 
 ## Nome do grupo
+Projeto individual 
 
 ## 👨‍🎓 Integrante: 
 - <a href="https://www.linkedin.com/in/laura-castilho/">Laura de Andrade Castilho - RM568507</a> 
@@ -26,51 +27,96 @@
 
 ## 📜 Descrição
 
-*Descreva seu projeto com base no texto da Global Solution (até 600 palavras)*
+O AgroNexusSpace é o projeto que estou desenvolvendo para a Global Solution
+2026.1: uma plataforma de monitoramento agrícola que combina dados "de
+satélite", sensores IoT (ESP32) e Machine Learning para ajudar um produtor a
+acompanhar a saúde da lavoura, prever a necessidade de irrigação e estimar a
+produtividade da safra.
+
+Como não tenho acesso a imagens reais de satélite nem a uma rede de sensores
+física, a primeira parte do projeto é uma camada de dados (`src/data_pipeline/`) que gera um dataset sintético com
+estrutura realista: 4 fazendas, 4 culturas (Soja, Milho, Algodão, Feijão) ao
+longo de 2 safras, com curvas de NDVI/EVI baseadas em modelos de fenologia,
+climatologia sazonal do Cerrado (região GO/MG), umidade do solo simulada por
+um modelo de "balde com vazamento" (satélite vs. sensor) e até falhas de
+sensor e ruído de rótulo, para se aproximar de dados de campo reais.
+
+A partir desse dataset, a camada de Machine Learning (`src/machine_learning/`)
+treina e compara modelos para as três tarefas centrais do projeto:
+
+- **status_saude** da lavoura (saudável / atenção / crítico): RandomForest,
+  GradientBoosting e uma rede neural (MLP) implementada em NumPy;
+- **necessidade_irrigacao** (sim/não): RandomForest vs. GradientBoosting;
+- **produtividade_estimada_ton_ha**: RandomForest vs. XGBoost.
+
+Toda a comparação é documentada com gráficos (matriz de confusão,
+importância de features, curvas de treinamento da RNA etc.) em
+`docs/graficos/`, e os modelos treinados ficam salvos em
+`src/machine_learning/models/`.
 
 
 ## 📁 Estrutura de pastas
 
-Dentre os arquivos e pastas presentes na raiz do projeto, definem-se:
-
-- <b>docs</b>: Pasta destinada à documentação textual, incluindo brainstorm, atas e registros de reuniões, desenhos, prints, diagramas, storyboard, estratégia de IA e arquitetura e etc.
-
-- <b>src</b>: Todo o código fonte desenvolvido, como scripts em Python, R, JS ou HTML, notebooks, códigos para ESP32/Arduino, APIs ou microsserviços, além de modelos, inferências e etc. Os tipos de arquivos e códigos são definidos no enunciado da atividade.
-
-- <b>data</b>: Contém os dados utilizados, como arquivos CSV, Excel, JSON, bases sintéticas e etc.
-
-- <b>README.md</b>: Arquivo que serve como guia e explicação geral sobre o projeto (o mesmo que você está lendo agora).
-
-
-‼️ OBSERVAÇÃO DO TUTOR, favor desconsiderar do seu arquivo final: não há obrigação de usar todas as pastas, use apenas o que fizer SENTIDO para a entrega. ‼️
+```
+.
+├── assets/                  # logo FIAP usada neste README
+├── data/                     # dataset sintético (raw/ e processed/) + dicionário de dados
+├── docs/
+│   └── graficos/             # gráficos gerados pela camada de ML
+├── src/
+│   ├── data_pipeline/        # geração de dados sintéticos, pré-processamento, feature engineering e split
+│   └── machine_learning/      # treino e avaliação dos modelos (RF, GB, XGBoost, RNA em NumPy)
+└── README.md                
+```
 
 
 ## 📎 Links e Observações
 
-- <b>Listagem de Links</b>: Links do projeto (ex. vídeos da entrega, páginas, etc.), 
-
-- <b>Explicação de decisões técnicas</b>: Observações do projeto,
-
-- <b>Observações Gerais</b>: Caso o projeto seja relacionado à alguma competição, deixar registrado no README se aceita ou não participar.
+- <b>Listagem de Links</b>: sem links externos por enquanto (vídeo de
+  apresentação será adicionado antes da entrega final).
+- <b>Explicação de decisões técnicas</b>: ver os READMEs de
+  `src/data_pipeline/` e `src/machine_learning/`, que detalham as escolhas de
+  cada camada.
+- <b>Observações Gerais</b>: projeto individual (RM568507), não vinculado a
+  nenhuma competição externa.
 
 
 ## 🔧 Como executar o código
 
-*Acrescentar as informações necessárias sobre pré-requisitos (IDEs, serviços, bibliotecas etc.) e instalação básica do projeto, descrevendo eventuais versões utilizadas. Colocar um passo a passo de como o leitor pode baixar o seu código e executá-lo a partir de sua máquina ou seu repositório.*
+Pré-requisito: Python 3.12+ (testado com 3.12.10).
+
+```bash
+# 1. (opcional) crie e ative um ambiente virtual
+python -m venv .venv
+.venv\Scripts\activate        # Windows
+# source .venv/bin/activate   # Linux/Mac
+
+# 2. instale as dependências de cada camada
+pip install -r src/data_pipeline/requirements.txt
+pip install -r src/machine_learning/requirements.txt
+
+# 3. gere o dataset sintético e os conjuntos de treino/teste
+python src/data_pipeline/run_pipeline.py
+
+# 4. treine e avalie os modelos de ML
+python src/machine_learning/treinar_modelos.py
+```
+
+O passo 3 cria `data/raw/dados_agricolas_sinteticos.csv` e
+`data/processed/{train,test}.csv` + `scaler.joblib`. O passo 4 usa esses
+arquivos para treinar os modelos (salvos em `src/machine_learning/models/`)
+e gerar os gráficos de avaliação em `docs/graficos/`. Toda a geração é
+determinística (seed 42), então rodar os dois scripts de novo reproduz
+exatamente os mesmos resultados.
 
 
 ## 🗃 Histórico de lançamentos
 
-* 0.5.0 - XX/XX/2024
-    * 
-* 0.4.0 - XX/XX/2024
-    * 
-* 0.3.0 - XX/XX/2024
-    * 
-* 0.2.0 - XX/XX/2024
-    * 
-* 0.1.0 - XX/XX/2024
-    *
+* 0.2.0 - 16/06/2026
+    * Camada de dados: gerador de dataset sintético, pré-processamento,
+      feature engineering e split treino/teste por talhão.
+* 0.1.0 - 15/06/2026
+    * Estrutura inicial do repositório a partir do template.
 
 ---
 
