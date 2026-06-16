@@ -59,24 +59,27 @@ importância de features, curvas de treinamento da RNA etc.) em
 
 ```
 .
-├── assets/                  # logo FIAP usada neste README
-├── data/                     # dataset sintético (raw/ e processed/) + dicionário de dados
+├── assets/                   # logo FIAP usada neste README
+├── data/
+│   ├── raw/                  # dataset sintético bruto gerado pelo pipeline
+│   ├── processed/            # train.csv, test.csv e scaler.joblib
+│   └── dicionario_dados.md   # descrição completa de todas as colunas
 ├── docs/
-│   └── graficos/             # gráficos gerados pela camada de ML
+│   └── graficos/             # gráficos gerados pela camada de ML (PNG)
 ├── src/
 │   ├── data_pipeline/        # geração de dados sintéticos, pré-processamento, feature engineering e split
-│   └── machine_learning/      # treino e avaliação dos modelos (RF, GB, XGBoost, RNA em NumPy)
-└── README.md                
+│   ├── dashboard/            # dashboard interativo Streamlit (monitoramento + predições)
+│   └── machine_learning/     # treino e avaliação dos modelos (RF, GB, XGBoost, RNA em NumPy)
+└── README.md
 ```
 
 
 ## 📎 Links e Observações
 
-- <b>Listagem de Links</b>: sem links externos por enquanto (vídeo de
-  apresentação será adicionado antes da entrega final).
+- <b>Vídeo demonstrativo</b>: [https://youtu.be/LINK_DO_VIDEO](https://youtu.be/LINK_DO_VIDEO) *(inserir antes da entrega final)*
 - <b>Explicação de decisões técnicas</b>: ver os READMEs de
-  `src/data_pipeline/` e `src/machine_learning/`, que detalham as escolhas de
-  cada camada.
+  `src/data_pipeline/`, `src/machine_learning/` e `src/dashboard/`, que
+  detalham as escolhas de cada camada.
 - <b>Observações Gerais</b>: projeto individual (RM568507), não vinculado a
   nenhuma competição externa.
 
@@ -94,24 +97,39 @@ python -m venv .venv
 # 2. instale as dependências de cada camada
 pip install -r src/data_pipeline/requirements.txt
 pip install -r src/machine_learning/requirements.txt
+pip install -r src/dashboard/requirements.txt
 
 # 3. gere o dataset sintético e os conjuntos de treino/teste
 python src/data_pipeline/run_pipeline.py
 
 # 4. treine e avalie os modelos de ML
 python src/machine_learning/treinar_modelos.py
+
+# 5. abra o dashboard interativo
+streamlit run src/dashboard/app.py
 ```
 
 O passo 3 cria `data/raw/dados_agricolas_sinteticos.csv` e
 `data/processed/{train,test}.csv` + `scaler.joblib`. O passo 4 usa esses
-arquivos para treinar os modelos (salvos em `src/machine_learning/models/`)
-e gerar os gráficos de avaliação em `docs/graficos/`. Toda a geração é
-determinística (seed 42), então rodar os dois scripts de novo reproduz
-exatamente os mesmos resultados.
+arquivos para treinar os modelos (salvos em `src/machine_learning/models/`) e
+gerar os gráficos de avaliação em `docs/graficos/`. O passo 5 abre o
+dashboard em `http://localhost:8501`, onde é possível selecionar o talhão e a
+safra, ver o monitoramento em tempo real e comparar as predições dos modelos
+com os dados reais. Toda a geração é determinística (seed 42), então rodar os
+passos 3 e 4 novamente reproduz exatamente os mesmos resultados.
 
 
 ## 🗃 Histórico de lançamentos
 
+* 0.4.0 - 16/06/2026
+    * Dashboard Streamlit interativo: monitoramento por talhão/safra, gráficos
+      de séries temporais (NDVI, umidade, precipitação, temperatura,
+      luminosidade), predições dos três modelos em tempo real e exibição de
+      métricas de avaliação.
+* 0.3.0 - 16/06/2026
+    * Camada de Machine Learning: Random Forest, Gradient Boosting, XGBoost e
+      RNA implementada do zero em NumPy; gráficos de matriz de confusão,
+      feature importance, curvas de treinamento e comparação de modelos.
 * 0.2.0 - 16/06/2026
     * Camada de dados: gerador de dataset sintético, pré-processamento,
       feature engineering e split treino/teste por talhão.
