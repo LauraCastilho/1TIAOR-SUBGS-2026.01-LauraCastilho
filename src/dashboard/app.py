@@ -75,6 +75,21 @@ def prever(df, modelos, features):
     return df
 
 
+def get_cultura(df):
+    """Deriva o nome da cultura a partir das colunas one-hot encoded."""
+    cultura_cols = {
+        "cultura_Soja": "Soja",
+        "cultura_Milho": "Milho",
+        "cultura_Feijao": "Feijao",
+        "cultura_Algodao": "Algodao",
+    }
+    row = df.iloc[0]
+    for col, nome in cultura_cols.items():
+        if col in df.columns and row[col] == 1:
+            return nome
+    return "Desconhecida"
+
+
 # ── Paleta / constantes visuais ───────────────────────────────────────────────
 
 COR_SAUDE = {"saudavel": "#2ecc71", "atencao": "#f39c12", "critico": "#e74c3c"}
@@ -116,7 +131,7 @@ def render_sidebar(df):
 def tab_monitoramento(df_sel, modelos, features):
     df_pred = prever(df_sel, modelos, features)
     atual = df_pred.iloc[-1]
-    cultura = df_sel["cultura"].iloc[0]
+    cultura = get_cultura(df_sel)
     talhao = df_sel["talhao_id"].iloc[0]
 
     st.markdown(f"### 📍 Talhão **{talhao}** — Cultura: **{cultura}**")
@@ -374,7 +389,7 @@ def tab_predicoes(df_sel, modelos, features):
             st.metric("Erro absoluto", f"{erro:.3f} ton/ha")
 
         # Gauge
-        cultura = df_sel["cultura"].iloc[0]
+        cultura = get_cultura(df_sel)
         max_prod = {"Soja": 5, "Milho": 9, "Algodao": 7, "Feijao": 3}.get(cultura, 8)
         fig_gauge = go.Figure(go.Indicator(
             mode="gauge+number+delta",
