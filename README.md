@@ -76,12 +76,10 @@ importância de features, curvas de treinamento da RNA etc.) em
 
 ## 📎 Links e Observações
 
-- <b>Vídeo demonstrativo</b>: [https://youtu.be/LINK_DO_VIDEO](https://youtu.be/LINK_DO_VIDEO) *(inserir antes da entrega final)*
+- <b>Vídeo demonstrativo</b>: [https://www.youtube.com/watch?v=qHsdGrq7KXY](https://www.youtube.com/watch?v=qHsdGrq7KXY)
 - <b>Explicação de decisões técnicas</b>: ver os READMEs de
   `src/data_pipeline/`, `src/machine_learning/` e `src/dashboard/`, que
   detalham as escolhas de cada camada.
-- <b>Observações Gerais</b>: projeto individual (RM568507), não vinculado a
-  nenhuma competição externa.
 
 
 ## 🔧 Como executar o código
@@ -121,6 +119,10 @@ passos 3 e 4 novamente reproduz exatamente os mesmos resultados.
 
 ## 🗃 Histórico de lançamentos
 
+* 0.6.0 - 16/06/2026
+    * Inclusão do link do vídeo 
+* 0.5.0 - 16/06/2026
+    * Ajustes no dashboard
 * 0.4.0 - 16/06/2026
     * Dashboard Streamlit interativo: monitoramento por talhão/safra, gráficos
       de séries temporais (NDVI, umidade, precipitação, temperatura,
